@@ -1,0 +1,14 @@
+# Ignore Java build files
+/backend/target/
+*.class
+
+# Ignore Eclipse files
+/.settings/
+
+# Ignore Node.js build files
+/frontend/node_modules/
+/frontend/dist/
+
+# Ignore OS-specific files
+.DS_Store
+Thumbs.db

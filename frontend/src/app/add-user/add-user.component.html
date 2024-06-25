@@ -1,0 +1,9 @@
+<div class="container">
+    <form (ngSubmit)=addUser()>
+        <input [(ngModel)]="user.name" name="name" type="text" />
+        <input [(ngModel)]="user.email" name="email" type="text" />
+        <button type="submit">
+            Add user
+        </button>
+    </form>
+</div>

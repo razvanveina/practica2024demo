@@ -1,17 +1,17 @@
 // backend/src/main/java/com/example/dao/UserDAO.java
 package com.ssn.practica.dao;
 
+import java.util.List;
+
 import org.hibernate.Session;
 
 import com.ssn.core.persistence.WithSessionAndTransaction;
 import com.ssn.practica.model.User;
 
-import java.util.List;
-
 public class UserDAO {
 
-    public List<User> getUsers() {
-    	return (List<User>) new WithSessionAndTransaction<List<User>>() {
+	public List<User> getUsers() {
+		return new WithSessionAndTransaction<List<User>>() {
 
 			@Override
 			protected void executeBusinessLogic(Session session) {
@@ -19,16 +19,28 @@ public class UserDAO {
 				setReturnValue(users);
 			}
 		}.run();
-    }
-    
-    public void addUser(User user) {
-        new WithSessionAndTransaction<Void>() {
+	}
 
-            @Override
-            protected void executeBusinessLogic(Session session) {
-                session.save(user); 
-            }
+	public void addUser(User user) {
+		new WithSessionAndTransaction<Void>() {
 
-        }.run();
-    }
+			@Override
+			protected void executeBusinessLogic(Session session) {
+				session.save(user);
+			}
+
+		}.run();
+	}
+
+	public void deleteUser(long userId) {
+		new WithSessionAndTransaction<Void>() {
+			@Override
+			protected void executeBusinessLogic(Session session) {
+				User user = session.get(User.class, userId);
+				if (user != null) {
+					session.delete(user);
+				}
+			}
+		}.run();
+	}
 }

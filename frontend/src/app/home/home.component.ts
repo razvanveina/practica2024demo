@@ -47,4 +47,13 @@ export class HomeComponent implements OnInit {
       this.users = users;
     })
   }
+
+
+  deleteUser(userId: number): void {
+    this.userService.deleteUser(userId).subscribe(() => {
+      this.userService.getUsers().subscribe(users => {
+        this.users = users;
+      })
+    });
+  }
 }

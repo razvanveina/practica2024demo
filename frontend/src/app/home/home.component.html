@@ -11,7 +11,7 @@
         <tbody>
             <tr scope="row" *ngFor="let user of users">
                 <td>
-                    {{user.id}}
+                    <a class="text-decoration-underline" style="cursor: pointer" (click)="editUser(user.id)">{{ user.id }}</a>
                 </td>
                 <td>
                     {{user.name}}

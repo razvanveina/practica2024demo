@@ -3,6 +3,7 @@ import { IUser } from './user.model';
 import { CommonModule } from '@angular/common';
 import { UserService } from '../user.service';
 import { HttpClientModule } from '@angular/common/http';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-home',
@@ -15,7 +16,7 @@ export class HomeComponent implements OnInit {
   users: IUser[];
   user: IUser = {id: 0, name : "qweqwe", email: "asdfasdf"};
 
-  constructor(private userService : UserService) {
+  constructor(private userService : UserService, private router : Router) {
 
 
 
@@ -53,7 +54,11 @@ export class HomeComponent implements OnInit {
     this.userService.deleteUser(userId).subscribe(() => {
       this.userService.getUsers().subscribe(users => {
         this.users = users;
-      })
+      });
     });
+  }
+
+  editUser(userId: number): void {
+    this.router.navigate(['/edit-user', userId]);
   }
 }

@@ -7,4 +7,5 @@ export const routes: Routes = [
     {path: 'home', component: HomeComponent},
     {path: 'adduser', component: AddUserComponent},
     {path: 'refresh', component: DataViewComponent},
+    { path: 'edit-user/:id', component: AddUserComponent }
 ];

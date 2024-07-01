@@ -7,6 +7,7 @@ import javax.ws.rs.Consumes;
 import javax.ws.rs.DELETE;
 import javax.ws.rs.GET;
 import javax.ws.rs.POST;
+import javax.ws.rs.PUT;
 import javax.ws.rs.Path;
 import javax.ws.rs.PathParam;
 import javax.ws.rs.Produces;
@@ -38,5 +39,24 @@ public class UserServlet {
 	public Response deleteUser(@PathParam("id") int id) {
 		userDAO.deleteUser(id);
 		return Response.status(Response.Status.NO_CONTENT).build();
+	}
+
+	@PUT
+	@Consumes(MediaType.APPLICATION_JSON)
+	public Response updateUser(User user) {
+		userDAO.updateUser(user);
+		return Response.status(Response.Status.OK).build();
+	}
+
+	@GET
+	@Path("/{id}")
+	@Produces(MediaType.APPLICATION_JSON)
+	public Response getUserById(@PathParam("id") long id) {
+		User user = userDAO.getUserById(id);
+		if (user != null) {
+			return Response.ok(user).build();
+		} else {
+			return Response.status(Response.Status.NOT_FOUND).build();
+		}
 	}
 }

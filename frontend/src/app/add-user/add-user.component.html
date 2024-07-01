@@ -1,5 +1,6 @@
 <div class="container">
-    <form (ngSubmit)=addUser()>
+    <h2>{{ isEditMode ? 'Edit User' : 'Add User' }}</h2>
+    <form (ngSubmit)="saveUser()">
         <div class="form-group">
             <label for="name">Name</label>
             <input [(ngModel)]="user.name" name="name" type="text" class="form-control"/>
@@ -9,7 +10,7 @@
             <input [(ngModel)]="user.email" name="email" type="text" class="form-control"/>
         </div>
         <button type="submit" class="btn btn-primary">
-            Add user
+            Save user
         </button>
     </form>
 </div>

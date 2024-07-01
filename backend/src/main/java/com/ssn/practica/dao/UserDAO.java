@@ -43,4 +43,24 @@ public class UserDAO {
 			}
 		}.run();
 	}
+
+	public void updateUser(User user) {
+		new WithSessionAndTransaction<Void>() {
+			@Override
+			protected void executeBusinessLogic(Session session) {
+				session.update(user);
+			}
+		}.run();
+	}
+
+	public User getUserById(long id) {
+		return new WithSessionAndTransaction<User>() {
+			@Override
+			protected void executeBusinessLogic(Session session) {
+				User user = session.get(User.class, id);
+				setReturnValue(user);
+			}
+		}.run();
+	}
+
 }

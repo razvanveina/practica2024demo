@@ -28,4 +28,12 @@ export class UserService {
   deleteUser(userId: number): Observable<void> {
     return this.http.delete<void>(`/api/users/${userId}`);
   }
+
+  updateUser(user: IUser): Observable<IUser> {
+    return this.http.put<IUser>('/api/users', user); 
+  }
+
+  getUserById(userId: number): Observable<IUser> {
+    return this.http.get<IUser>(`/api/users/${userId}`);
+  }
 }
